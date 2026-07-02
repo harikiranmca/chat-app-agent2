@@ -1,9 +1,11 @@
+import cors from 'cors';
 import express, { Request, Response, NextFunction } from 'express';
 import { connectDb, closeDb } from './db.js';
 import { messagesRouter } from './messages.js';
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 app.get('/health', (_req, res) => {
