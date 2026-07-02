@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import { afterEach, beforeEach, expect, test, vi } from 'vitest';
 import App from './App';
 
@@ -13,20 +13,23 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 
-test('renders Chat App heading', () => {
-  render(<App />);
+test('renders Chat App heading', async () => {
+  await act(async () => {
+    render(<App />);
+  });
   expect(screen.getByRole('heading', { name: /chat app/i })).toBeDefined();
 });
 
 test('shows "No messages yet" after loading', async () => {
-  render(<App />);
+  await act(async () => {
+    render(<App />);
+  });
   await waitFor(() => {
     expect(screen.getByText('No messages yet')).toBeDefined();
   });
 });
 
 test('shows loading state initially', () => {
-  // Make fetch hang so we can observe the loading state
   vi.spyOn(global, 'fetch').mockReturnValue(new Promise(() => {}));
   render(<App />);
   expect(screen.getByText('Loading messages...')).toBeDefined();
@@ -34,7 +37,9 @@ test('shows loading state initially', () => {
 
 test('shows error when fetch fails', async () => {
   vi.spyOn(global, 'fetch').mockRejectedValue(new Error('Network error'));
-  render(<App />);
+  await act(async () => {
+    render(<App />);
+  });
   await waitFor(() => {
     expect(screen.getByRole('alert')).toBeDefined();
     expect(screen.getByText('Network error')).toBeDefined();
