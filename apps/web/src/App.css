@@ -1,0 +1,153 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #f5f5f5;
+  color: #222;
+}
+
+.app {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Error */
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fee;
+  border: 1px solid #e88;
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  color: #a00;
+}
+
+.error-dismiss {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: #a00;
+  padding: 0 0.25rem;
+}
+
+/* Loading */
+.loading {
+  text-align: center;
+  color: #666;
+  padding: 2rem 0;
+}
+
+/* No messages */
+.no-messages {
+  text-align: center;
+  color: #888;
+  padding: 2rem 0;
+}
+
+/* Message list */
+.message-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.message-item {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+}
+
+.message-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.message-sender {
+  font-weight: 700;
+}
+
+.message-time {
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.message-content {
+  margin: 0;
+  overflow-wrap: break-word;
+}
+
+/* Form */
+.message-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.message-form input {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.message-form input:focus {
+  outline: none;
+  border-color: #0070f3;
+  box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.15);
+}
+
+.message-form button {
+  padding: 0.6rem 1.5rem;
+  background: #0070f3;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.message-form button:hover:not(:disabled) {
+  background: #005bb5;
+}
+
+.message-form button:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (min-width: 480px) {
+  .message-form {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .input-sender {
+    flex: 0 0 30%;
+  }
+
+  .input-content {
+    flex: 1;
+  }
+
+  .message-form button {
+    flex: 0 0 auto;
+  }
+}
