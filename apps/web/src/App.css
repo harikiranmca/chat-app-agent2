@@ -1,3 +1,23 @@
+:root {
+  --color-accent: #e05d44;
+  --color-accent-hover: #c14a35;
+  --color-accent-disabled: #d4a59a;
+  --color-accent-ring: rgba(224, 93, 68, 0.18);
+  --color-title: #2b6777;
+  --color-text: #222;
+  --color-text-muted: #6b7c80;
+  --color-text-muted-dark: #5c6b73;
+  --color-error: #9b2c2c;
+  --color-error-bg: #fef0ed;
+  --color-error-border: #f0a89a;
+  --color-bubble-bg: #faf5ff;
+  --color-bubble-border: #e8dff0;
+  --color-bubble-shadow: rgba(107, 70, 193, 0.06);
+  --color-input-border: #d1c4e9;
+  --gradient-bg-start: #fdf6f0;
+  --gradient-bg-end: #f0f4fd;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -5,8 +25,9 @@
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: #f5f5f5;
-  color: #222;
+  background: linear-gradient(135deg, var(--gradient-bg-start) 0%, var(--gradient-bg-end) 100%);
+  min-height: 100vh;
+  color: var(--color-text);
 }
 
 .app {
@@ -18,6 +39,7 @@ body {
 h1 {
   text-align: center;
   margin-bottom: 1rem;
+  color: var(--color-title);
 }
 
 /* Error */
@@ -25,12 +47,12 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #fee;
-  border: 1px solid #e88;
+  background: var(--color-error-bg);
+  border: 1px solid var(--color-error-border);
   border-radius: 4px;
   padding: 0.75rem 1rem;
   margin-bottom: 1rem;
-  color: #a00;
+  color: var(--color-error);
 }
 
 .error-dismiss {
@@ -38,21 +60,21 @@ h1 {
   border: none;
   font-size: 1.25rem;
   cursor: pointer;
-  color: #a00;
+  color: var(--color-error);
   padding: 0 0.25rem;
 }
 
 /* Loading */
 .loading {
   text-align: center;
-  color: #666;
+  color: var(--color-text-muted-dark);
   padding: 2rem 0;
 }
 
 /* No messages */
 .no-messages {
   text-align: center;
-  color: #888;
+  color: var(--color-text-muted);
   padding: 2rem 0;
 }
 
@@ -65,10 +87,11 @@ h1 {
 }
 
 .message-item {
-  background: #fff;
-  border: 1px solid #ddd;
+  background: var(--color-bubble-bg);
+  border: 1px solid var(--color-bubble-border);
   border-radius: 6px;
   padding: 0.75rem 1rem;
+  box-shadow: 0 1px 3px var(--color-bubble-shadow);
 }
 
 .message-header {
@@ -84,7 +107,7 @@ h1 {
 
 .message-time {
   font-size: 0.75rem;
-  color: #888;
+  color: var(--color-text-muted);
 }
 
 .message-content {
@@ -101,7 +124,7 @@ h1 {
 
 .message-form input {
   padding: 0.6rem 0.75rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-input-border);
   border-radius: 4px;
   font-size: 1rem;
   width: 100%;
@@ -109,13 +132,13 @@ h1 {
 
 .message-form input:focus {
   outline: none;
-  border-color: #0070f3;
-  box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.15);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px var(--color-accent-ring);
 }
 
 .message-form button {
   padding: 0.6rem 1.5rem;
-  background: #0070f3;
+  background: var(--color-accent);
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -124,11 +147,11 @@ h1 {
 }
 
 .message-form button:hover:not(:disabled) {
-  background: #005bb5;
+  background: var(--color-accent-hover);
 }
 
 .message-form button:disabled {
-  background: #aaa;
+  background: var(--color-accent-disabled);
   cursor: not-allowed;
 }
 
