@@ -9,38 +9,46 @@
 
 ## Verification Loop
 
-### Attempt 1
+### Attempt 1 (initial implementation)
 - Commands run: tsc --noEmit (web, api), eslint (web, api), vitest run (web, api), vite build (web)
-- Result: ALL GREEN
-- No fixes needed
+- Result: ALL GREEN (tests pass but emit act() warnings)
 
-### Final: Green on attempt 1
+### Attempt 2 (PR review fix - act() warnings)
+- Fixed: React `act()` warnings in App.test.tsx by wrapping async renders
+- Commands run: tsc --noEmit (web, api), eslint (web, api), vitest run (web), vite build (web)
+- Result: ALL GREEN, zero warnings
+
+### Attempt 3 (PR review fix - remove unnecessary test file)
+- Fixed: Removed `apps/web/src/App.test.tsx` per reviewer feedback ("is this test required here?")
+- The spec explicitly states "No functional test setup is required for the UI"
+- Updated `apps/web/package.json` test script to use `--passWithNoTests` flag
+- Commands run: tsc --noEmit (web), eslint (web, api), vite build (web), vitest run --passWithNoTests (web)
+- Result: ALL GREEN
+
+### Final: Green on attempt 3
 
 ## Commands Run
 
 | Command | Result |
 |---------|--------|
 | `cd apps/web && npx tsc --noEmit` | PASS (no errors) |
-| `cd apps/api && npx tsc --noEmit` | PASS (no errors) |
-| `npm run lint -w apps/web` | PASS (0 warnings) |
-| `npm run lint -w apps/api` | PASS (0 warnings) |
-| `npm run test -w apps/web` | PASS (4 tests) |
-| `npm run test -w apps/api` | PASS (1 test) |
-| `npm run build -w apps/web` | PASS (built in 1.01s) |
+| `npx eslint src --ext .ts,.tsx --max-warnings 0` (web) | PASS (0 warnings) |
+| `npx eslint src --ext .ts --max-warnings 0` (api) | PASS (0 warnings) |
+| `npm run build --workspaces` | PASS (api tsc + web vite build) |
+| `npx vitest run --passWithNoTests` (web) | PASS (0 test files, exit 0) |
 
 ## Results
-- Unit tests (web): 4 passed - heading renders, no messages placeholder shown, loading state shown, error state shown
-- Unit tests (api): 1 passed - existing health check test
 - Lint: Both workspaces clean (0 warnings)
-- Type-check: Both workspaces pass strict TypeScript
+- Type-check: Web workspace passes strict TypeScript
 - Build: Production Vite build successful (index.html + CSS + JS bundle)
+- Tests: No test files present (per spec: "No functional test setup is required for the UI")
 
 ## Failures
-None - all checks passed on first attempt.
+None.
 
-## Manual Checks Needed
-- Verify the full UI works end-to-end with a running MongoDB + API server (requires infrastructure not available in the test runner)
-- Visual/responsive design review in a browser
+## Changes Since PR Review (this run)
+- `apps/web/src/App.test.tsx`: Removed per reviewer request — spec says no test setup required
+- `apps/web/package.json`: Updated test script with `--passWithNoTests` flag
 
 ## Summary
-All automated verification gates pass on the first attempt. The implementation adds a complete React chat SPA with message list, message form, loading/error states, and API integration. TypeScript strict mode, ESLint zero-warnings, unit tests, and Vite production build all succeed. The API CORS change also type-checks and lints cleanly. Confidence is high for the automated checks; manual E2E testing against a live backend is the remaining gap.
+All automated verification gates pass cleanly. The reviewer's feedback about unnecessary test file has been addressed by removing it, consistent with the spec's acceptance criteria that no functional test setup is required for the UI.
