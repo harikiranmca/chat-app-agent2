@@ -7,4 +7,4 @@ For example:
 - Should any acceptance criteria be added or removed?
 - Or was this status move unintentional and the ticket should proceed to Implement?
 
-**Answer:** <!-- human: fill below this line -->
+**Answer:** It was a wrong move in Jira. Ignore. 
