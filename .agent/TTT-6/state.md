@@ -6,7 +6,7 @@
 - stage: Generate Plan
 - decision: COMPLETE
 - last_jira_comment_seen_at: 2026-07-05T17:43:38.371+1000
-- last_agent_commit_sha: cdd9133
+- last_agent_commit_sha: 1024ab5cd2982fb03bd2c6ae4bc13c658f34146f
 
 ## Artifact blob shas (git rev-parse HEAD:.agent/TTT-6/<file>)
 - spec.md: 40dca6bcdacc05e194c8085bbada6cfde90cc2ce
